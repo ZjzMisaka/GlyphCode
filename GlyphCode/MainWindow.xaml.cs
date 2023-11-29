@@ -51,7 +51,7 @@ namespace GlyphCode
             ResourceHelper.ReadPng("img/Numbers", numbersDic);
         }
 
-        private void btnStartClick(object sender, RoutedEventArgs e)
+        private void BtnStartClick(object sender, RoutedEventArgs e)
         {
             string input = tbInput.Text;
 
@@ -164,9 +164,11 @@ namespace GlyphCode
             }
         }
 
-        private void btnClearClick(object sender, RoutedEventArgs e)
+        private void BtnClearClick(object sender, RoutedEventArgs e)
         {
             cvDrawing.Children.Clear();
+            offsetX = 0;
+            offsetY = 0;
         }
     }
 }

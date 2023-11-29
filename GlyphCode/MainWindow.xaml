@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GlyphCode"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -18,8 +18,8 @@
 
         <TextBox Grid.Row="0" Grid.Column="0" x:Name="tbInput" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px"></TextBox>
         <StackPanel Grid.Row="1" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
-            <Button x:Name="btnStart" Width="80px" Margin="5px" Content="Start" Click="btnStartClick"></Button>
-            <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="btnClearClick"></Button>
+            <Button x:Name="btnStart" Width="80px" Margin="5px" Content="Start" Click="BtnStartClick"></Button>
+            <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="BtnClearClick"></Button>
             <TextBox x:Name="tbWidth" Width="160px" Margin="5px" Text="800"></TextBox>
             <TextBlock Text=" :Width" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5px"></TextBlock>
         </StackPanel>
