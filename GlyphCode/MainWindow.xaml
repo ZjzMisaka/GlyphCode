@@ -24,10 +24,12 @@
             <TextBlock Text=" :Width" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5px"></TextBlock>
         </StackPanel>
 
-        <Grid x:Name="gCanvas" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Canvas Name="cvDrawing" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  />
-            </ScrollViewer>
+        <Grid x:Name="gCanvas" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px">
+            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Gray">
+                <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Canvas Name="cvDrawing" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </ScrollViewer>
+            </Border>
         </Grid>
     </Grid>
 </Window>
