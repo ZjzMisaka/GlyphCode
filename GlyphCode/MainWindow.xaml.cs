@@ -78,6 +78,13 @@ namespace GlyphCode
 
         private void DrawText(string text, bool autoSpace)
         {
+            if (text == "\n")
+            {
+                offsetX = 0;
+                offsetY += 16;
+                return;
+            }
+
             bool isNumeric = int.TryParse(text, out _);
             Dictionary<string, bool[,]> imgInfoDic;
             string infoText;

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="auto"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" x:Name="tbInput" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="0" x:Name="tbInput" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px"></TextBox>
         <StackPanel Grid.Row="1" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="btnStart" Width="80px" Margin="5px" Content="Start" Click="btnStartClick"></Button>
             <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="btnClearClick"></Button>
