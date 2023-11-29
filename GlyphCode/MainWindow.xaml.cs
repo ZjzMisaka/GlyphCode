@@ -68,15 +68,15 @@ namespace GlyphCode
                 {
                     if (char.GetUnicodeCategory(bText[0]) == UnicodeCategory.OtherLetter && char.GetUnicodeCategory(text) == UnicodeCategory.OtherLetter)
                     {
-                        DrawText(" ");
+                        DrawText(" ", true);
                     }
                 }
 
-                DrawText(text.ToString());
+                DrawText(text.ToString(), false);
             }
         }
 
-        private void DrawText(string text)
+        private void DrawText(string text, bool autoSpace)
         {
             bool isNumeric = int.TryParse(text, out _);
             Dictionary<string, bool[,]> imgInfoDic;
@@ -117,7 +117,7 @@ namespace GlyphCode
                 bool[,] imageData;
                 if (info.ToString() == " ")
                 {
-                    if (offsetX == 0)
+                    if (autoSpace && offsetX == 0)
                     {
                         continue;
                     }
