@@ -118,7 +118,8 @@ namespace GlyphCode
             double width;
             if (tbWidth.Text == "")
             {
-                width = gCanvas.ActualWidth;
+                width = gCanvas.ActualWidth - 8;
+                cvDrawing.Width = width - 4;
             }
             else
             {
@@ -127,8 +128,8 @@ namespace GlyphCode
                     MessageBox.Show("Wrong width");
                     return false;
                 }
+                cvDrawing.Width = width;
             }
-            cvDrawing.Width = width;
             if (offsetX + infoText.Length * 16 > width)
             {
                 if (offsetX == 0)
