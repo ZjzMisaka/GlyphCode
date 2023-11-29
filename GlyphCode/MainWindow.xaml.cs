@@ -81,7 +81,7 @@ namespace GlyphCode
                 }
             }
 
-            gCanvas.Height = offsetY + 16;
+            cvDrawing.Height = offsetY + 16;
         }
 
         private bool DrawText(string text, bool autoSpace)
