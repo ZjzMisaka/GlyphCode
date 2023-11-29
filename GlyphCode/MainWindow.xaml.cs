@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,24 @@ namespace GlyphCode
         private Dictionary<string, string> strokeOrderDic = new Dictionary<string, string>();
         private Dictionary<string, bool[,]> charactersDic = new Dictionary<string, bool[,]>();
         private Dictionary<string, bool[,]> numbersDic = new Dictionary<string, bool[,]>();
+
+        private bool[,] spaceData;
+
+        private int offsetX = 0;
+        private int offsetY = 0;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            spaceData = new bool[16, 16];
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 16; j++)
+                {
+                    spaceData[i, j] = true;
+                }
+            }
 
             ResourceHelper.ReadStrokeOrder("StrokeOrder.txt", strokeOrderDic);
 
@@ -35,6 +51,115 @@ namespace GlyphCode
             ResourceHelper.ReadPng("img/Numbers", numbersDic);
         }
 
-        
+        private void btnStartClick(object sender, RoutedEventArgs e)
+        {
+            string input = tbInput.Text;
+
+            for (int i = 0; i < input.Length; ++i)
+            {
+                char text = input[i];
+                string bText = null;
+                if (i - 1 >= 0)
+                {
+                    bText = input[i - 1].ToString();
+                }
+
+                if (bText != null)
+                {
+                    if (char.GetUnicodeCategory(bText[0]) == UnicodeCategory.OtherLetter && char.GetUnicodeCategory(text) == UnicodeCategory.OtherLetter)
+                    {
+                        DrawText(" ");
+                    }
+                }
+
+                DrawText(text.ToString());
+            }
+        }
+
+        private void DrawText(string text)
+        {
+            bool isNumeric = int.TryParse(text, out _);
+            Dictionary<string, bool[,]> imgInfoDic;
+            string infoText;
+            if (isNumeric)
+            {
+                imgInfoDic = numbersDic;
+                infoText = text;
+            }
+            else
+            {
+                imgInfoDic = charactersDic;
+
+                if (!strokeOrderDic.ContainsKey(text))
+                {
+                    infoText = " ";
+                }
+                else
+                {
+                    infoText = strokeOrderDic[text];
+                }
+            }
+
+            int.TryParse(tbWidth.Text, out int width);
+            if (offsetX + infoText.Length * 16 > width)
+            {
+                if (offsetX == 0)
+                {
+                    throw new Exception("Width too small");
+                }
+
+                offsetX = 0;
+                offsetY += 16;
+            }
+
+            foreach (char info in infoText)
+            {
+                bool[,] imageData;
+                if (info.ToString() == " ")
+                {
+                    if (offsetX == 0)
+                    {
+                        continue;
+                    }
+
+                    imageData = spaceData;
+                }
+                else
+                {
+                    imageData = imgInfoDic[info.ToString()];
+                }
+                DrawImage(imageData, offsetX, offsetY);
+                offsetX += 16;
+            }
+        }
+
+        private void DrawImage(bool[,] imageData, int offsetX, int offsetY)
+        {
+            for (int x = 0; x < 16; x++)
+            {
+                for (int y = 0; y < 16; y++)
+                {
+                    if (!imageData[x, y])
+                    {
+                        System.Windows.Shapes.Rectangle rectangle = new System.Windows.Shapes.Rectangle
+                        {
+                            Width = 1,
+                            Height = 1,
+                            Fill = System.Windows.Media.Brushes.Black
+                        };
+
+                        Canvas.SetLeft(rectangle, x + offsetX);
+                        Canvas.SetTop(rectangle, y + offsetY);
+
+                        cvDrawing.Children.Add(rectangle);
+                    }
+                }
+            }
+        }
+
+        private void btnClearClick(object sender, RoutedEventArgs e)
+        {
+            cvDrawing.Children.Clear();
+        }
     }
 }
