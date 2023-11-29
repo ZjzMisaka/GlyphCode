@@ -17,12 +17,12 @@
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Row="0" Grid.Column="0" x:Name="tbInput" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px"></TextBox>
-        <StackPanel Grid.Row="1" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
-            <Button x:Name="btnStart" Width="80px" Margin="5px" Content="Start" Click="BtnStartClick"></Button>
-            <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="BtnClearClick"></Button>
-            <CheckBox x:Name="cbMode" Content="Brief Mode" Margin="5px" VerticalContentAlignment="Center"></CheckBox>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock Text="Width: " HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5px"></TextBlock>
             <TextBox x:Name="tbWidth" Width="160px" Margin="5px"></TextBox>
-            <TextBlock Text=" :Width" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5px"></TextBlock>
+            <CheckBox x:Name="cbMode" Content="Brief Mode" Margin="5px" VerticalContentAlignment="Center"></CheckBox>
+            <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="BtnClearClick"></Button>
+            <Button x:Name="btnStart" Width="80px" Margin="5px" Content="Start" Click="BtnStartClick"></Button>
         </StackPanel>
 
         <Grid x:Name="gCanvas" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px">
@@ -32,7 +32,7 @@
                 </ScrollViewer>
             </Border>
         </Grid>
-        <StackPanel Grid.Row="1" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="btnSave" Width="80px" Margin="5px" Content="Save" Click="BtnSaveClick"></Button>
         </StackPanel>
     </Grid>
