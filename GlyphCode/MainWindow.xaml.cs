@@ -118,8 +118,8 @@ namespace GlyphCode
             double width;
             if (tbWidth.Text == "")
             {
-                width = gCanvas.ActualWidth - 8;
-                cvDrawing.Width = width - 4;
+                width = gCanvas.ActualWidth - 2;
+                cvDrawing.Width = width - 1;
             }
             else
             {
