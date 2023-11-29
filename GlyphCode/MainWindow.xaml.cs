@@ -194,5 +194,18 @@ namespace GlyphCode
             offsetX = 0;
             offsetY = 0;
         }
+
+        private void BtnSaveClick(object sender, RoutedEventArgs e)
+        {
+            RenderTargetBitmap bmp = new RenderTargetBitmap((int)cvDrawing.ActualWidth, (int)cvDrawing.ActualHeight, 100.0, 100.0, PixelFormats.Default);
+            bmp.Render(cvDrawing);
+
+            PngBitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bmp));
+
+            System.IO.FileStream stream = System.IO.File.Create("G:\\Canvas.png");
+            encoder.Save(stream);
+            stream.Close();
+        }
     }
 }

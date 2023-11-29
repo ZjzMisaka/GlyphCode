@@ -27,9 +27,12 @@
         <Grid x:Name="gCanvas" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px">
             <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="Gray">
                 <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Canvas Name="cvDrawing" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <Canvas Name="cvDrawing" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 </ScrollViewer>
             </Border>
         </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Horizontal">
+            <Button x:Name="btnSave" Width="80px" Margin="5px" Content="Save" Click="BtnSaveClick"></Button>
+        </StackPanel>
     </Grid>
 </Window>
