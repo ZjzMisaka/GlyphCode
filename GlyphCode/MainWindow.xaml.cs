@@ -26,6 +26,7 @@ namespace GlyphCode
         private Dictionary<string, string> strokeOrderDic = new Dictionary<string, string>();
         private Dictionary<string, bool[,]> charactersDic = new Dictionary<string, bool[,]>();
         private Dictionary<string, bool[,]> numbersDic = new Dictionary<string, bool[,]>();
+        private Dictionary<string, bool[,]> symbolsDic = new Dictionary<string, bool[,]>();
 
         private bool[,] spaceData;
 
@@ -49,6 +50,7 @@ namespace GlyphCode
 
             ResourceHelper.ReadPng("img/Characters", charactersDic);
             ResourceHelper.ReadPng("img/Numbers", numbersDic);
+            ResourceHelper.ReadPng("img/Symbols", symbolsDic);
         }
 
         private void BtnStartClick(object sender, RoutedEventArgs e)
@@ -100,6 +102,42 @@ namespace GlyphCode
             {
                 imgInfoDic = numbersDic;
                 infoText = text;
+            }
+            else if (text.Length == 1 && "[]()<>{}⟪ ⟫（）［］｛｝《》【】「」『』,.，。!?！？:：".Contains(text))
+            {
+                imgInfoDic = symbolsDic;
+                if (",，".Contains(text))
+                {
+                    infoText = "a";
+                }
+                else if (".。".Contains(text))
+                {
+                    infoText = "b";
+                }
+                else if ("[(<{⟪（［｛《【「『".Contains(text))
+                {
+                    infoText = "c";
+                }
+                else if ("])>}⟫）］｝》】」』".Contains(text))
+                {
+                    infoText = "d";
+                }
+                else if ("!！".Contains(text))
+                {
+                    infoText = "e";
+                }
+                else if ("?？".Contains(text))
+                {
+                    infoText = "f";
+                }
+                else if (":：".Contains(text))
+                {
+                    infoText = "g";
+                }
+                else
+                {
+                    infoText = " ";
+                }
             }
             else
             {
@@ -204,7 +242,7 @@ namespace GlyphCode
             PngBitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bmp));
 
-            System.IO.FileStream stream = System.IO.File.Create("G:\\Canvas.png");
+            System.IO.FileStream stream = System.IO.File.Create("Canvas.png");
             encoder.Save(stream);
             stream.Close();
         }
