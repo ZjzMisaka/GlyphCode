@@ -13,17 +13,21 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <TextBox Grid.Row="0" Grid.Column="0" x:Name="tbInput" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px"></TextBox>
         <StackPanel Grid.Row="1" Grid.Column="0" FlowDirection="RightToLeft" Orientation="Horizontal">
             <Button x:Name="btnStart" Width="80px" Margin="5px" Content="Start" Click="BtnStartClick"></Button>
             <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="BtnClearClick"></Button>
-            <TextBox x:Name="tbWidth" Width="160px" Margin="5px" Text="800"></TextBox>
+            <TextBox x:Name="tbWidth" Width="160px" Margin="5px"></TextBox>
             <TextBlock Text=" :Width" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5px"></TextBlock>
         </StackPanel>
 
-        <Canvas Grid.Row="0" Grid.Column="1" Name="cvDrawing" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Grid x:Name="gCanvas" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Canvas Name="cvDrawing" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top"  />
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

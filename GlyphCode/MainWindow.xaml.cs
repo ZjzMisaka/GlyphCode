@@ -68,21 +68,29 @@ namespace GlyphCode
                 {
                     if (char.GetUnicodeCategory(bText[0]) == UnicodeCategory.OtherLetter && char.GetUnicodeCategory(text) == UnicodeCategory.OtherLetter)
                     {
-                        DrawText(" ", true);
+                        if (!DrawText(" ", true))
+                        {
+                            return;
+                        }
                     }
                 }
 
-                DrawText(text.ToString(), false);
+                if (!DrawText(text.ToString(), false))
+                {
+                    return;
+                }
             }
+
+            gCanvas.Height = offsetY + 16;
         }
 
-        private void DrawText(string text, bool autoSpace)
+        private bool DrawText(string text, bool autoSpace)
         {
             if (text == "\n")
             {
                 offsetX = 0;
                 offsetY += 16;
-                return;
+                return true;
             }
 
             bool isNumeric = int.TryParse(text, out _);
@@ -107,12 +115,26 @@ namespace GlyphCode
                 }
             }
 
-            int.TryParse(tbWidth.Text, out int width);
+            double width;
+            if (tbWidth.Text == "")
+            {
+                width = gCanvas.ActualWidth;
+            }
+            else
+            {
+                if (!double.TryParse(tbWidth.Text, out width))
+                {
+                    MessageBox.Show("Wrong width");
+                    return false;
+                }
+            }
+            cvDrawing.Width = width;
             if (offsetX + infoText.Length * 16 > width)
             {
                 if (offsetX == 0)
                 {
-                    throw new Exception("Width too small");
+                    MessageBox.Show("Width too small");
+                    return false;
                 }
 
                 offsetX = 0;
@@ -138,6 +160,8 @@ namespace GlyphCode
                 DrawImage(imageData, offsetX, offsetY);
                 offsetX += 16;
             }
+
+            return true;
         }
 
         private void DrawImage(bool[,] imageData, int offsetX, int offsetY)
