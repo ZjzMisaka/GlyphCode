@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -150,6 +151,38 @@ namespace GlyphCode
                 else
                 {
                     infoText = strokeOrderDic[text];
+
+                    if ((bool)cbMode.IsChecked)
+                    {
+                        bool combo = false;
+                        string newInfoText = "";
+                        for (int i = 0; i < infoText.Length; ++i)
+                        {
+                            string nowText = infoText[i].ToString();
+                            if (i >= 1)
+                            {
+                                string befText = infoText[i - 1].ToString();
+                                if (nowText == befText)
+                                {
+                                    if (!combo)
+                                    {
+                                        newInfoText += "8";
+                                        combo = true;
+                                    }
+                                }
+                                else
+                                {
+                                    newInfoText += nowText;
+                                    combo = false;
+                                }
+                            }
+                            else
+                            {
+                                newInfoText += nowText;
+                            }
+                        }
+                        infoText = newInfoText;
+                    }
                 }
             }
 
