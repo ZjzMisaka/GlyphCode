@@ -31,8 +31,8 @@ namespace GlyphCode
 
         private bool[,] spaceData;
 
-        private int offsetX = 0;
-        private int offsetY = 0;
+        private int offsetX = 8;
+        private int offsetY = 8;
 
         public MainWindow()
         {
@@ -84,14 +84,14 @@ namespace GlyphCode
                 }
             }
 
-            cvDrawing.Height = offsetY + 16;
+            cvDrawing.Height = offsetY + 16 + 8;
         }
 
         private bool DrawText(string text, bool autoSpace)
         {
             if (text == "\n")
             {
-                offsetX = 0;
+                offsetX = 8;
                 offsetY += 16;
                 return true;
             }
@@ -201,15 +201,18 @@ namespace GlyphCode
                 }
                 cvDrawing.Width = width;
             }
+
+            width -= 16;
+
             if (offsetX + infoText.Length * 16 > width)
             {
-                if (offsetX == 0)
+                if (offsetX == 8)
                 {
                     MessageBox.Show("Width too small");
                     return false;
                 }
 
-                offsetX = 0;
+                offsetX = 8;
                 offsetY += 16;
             }
 
@@ -263,13 +266,18 @@ namespace GlyphCode
         private void BtnClearClick(object sender, RoutedEventArgs e)
         {
             cvDrawing.Children.Clear();
-            offsetX = 0;
-            offsetY = 0;
+            offsetX = 8;
+            offsetY = 8;
         }
 
         private void BtnSaveClick(object sender, RoutedEventArgs e)
         {
-            RenderTargetBitmap bmp = new RenderTargetBitmap((int)cvDrawing.ActualWidth, (int)cvDrawing.ActualHeight, 100.0, 100.0, PixelFormats.Default);
+            if (cvDrawing.ActualWidth == 0 || cvDrawing.ActualHeight == 0)
+            {
+                return;
+            }
+
+            RenderTargetBitmap bmp = new RenderTargetBitmap((int)cvDrawing.ActualWidth, (int)cvDrawing.ActualHeight, 96, 96, PixelFormats.Default);
             bmp.Render(cvDrawing);
 
             PngBitmapEncoder encoder = new PngBitmapEncoder();

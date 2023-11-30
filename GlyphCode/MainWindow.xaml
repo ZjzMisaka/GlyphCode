@@ -5,23 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GlyphCode"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200">
+        Title="GlyphCode" Height="800" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0" x:Name="tbInput" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px"></TextBox>
+        <TextBox Grid.Row="0" Grid.Column="0" x:Name="tbInput" AcceptsReturn="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5px" BorderBrush="Gray" TextWrapping="Wrap"></TextBox>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="Width: " HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5px"></TextBlock>
-            <TextBox x:Name="tbWidth" Width="160px" Margin="5px"></TextBox>
+            <TextBox x:Name="tbWidth" Width="80px" Margin="5px"></TextBox>
             <CheckBox x:Name="cbMode" Content="Brief Mode" Margin="5px" VerticalContentAlignment="Center"></CheckBox>
-            <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="BtnClearClick"></Button>
             <Button x:Name="btnStart" Width="80px" Margin="5px" Content="Start" Click="BtnStartClick"></Button>
         </StackPanel>
 
@@ -33,6 +32,7 @@
             </Border>
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnClear" Width="80px" Margin="5px" Content="Clear" Click="BtnClearClick"></Button>
             <Button x:Name="btnSave" Width="80px" Margin="5px" Content="Save" Click="BtnSaveClick"></Button>
         </StackPanel>
     </Grid>
